@@ -22,14 +22,10 @@ class UsersRepository implements IUsersRepository {
   create({ name, email }: ICreateUserDTO): User {
     let newUser = new User();
 
-    newUser = {
-      id: uuidV4(),
-      name: name,
-      admin: "false",
-      email: email,
-      created_at: new Date(),
-      updated_at: new Date()
-    };
+    newUser.name = name;
+    newUser.email = email;
+    newUser.created_at = new Date();
+    newUser.updated_at = new Date();
 
     this.users.push(newUser);
 
@@ -47,7 +43,7 @@ class UsersRepository implements IUsersRepository {
 
   turnAdmin(receivedUser: User): User {
     const user = this.findById(receivedUser.id);
-    user.admin = "true";
+    user.admin = true;
     user.updated_at = new Date();
 
     return user;
